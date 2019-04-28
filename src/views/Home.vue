@@ -11,7 +11,8 @@
 
 <script>
 // @ is an alias to /src
-import { mapGetters } from "vuex";
+import { sync } from "vuex-pathify";
+
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
@@ -20,30 +21,8 @@ export default {
     HelloWorld
   },
   computed: {
-    // ...mapGetters("cart", ["showProduct"]), <- when you have only one module
-    ...mapGetters({
-      showProduct: "cart/showProduct",
-      showState: "store/showState"
-    }),
-    // setting v-model in vuex firstName & product are v-model
-    firstName: {
-      get() {
-        return this.showState.firstName;
-      },
-      set(val) {
-        // calling mutation on store.js with firstName
-        this.$store.commit("store/firstName", val);
-      }
-    },
-    product: {
-      get() {
-        return this.showProduct.products;
-      },
-      set(val) {
-        // calling mutation on cart.js with updateProduct
-        this.$store.commit("cart/updateProduct", val);
-      }
-    }
+    firstName: sync("store/firstName"),
+    product: sync("cart/products")
   }
 };
 </script>

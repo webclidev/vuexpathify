@@ -1,20 +1,10 @@
+import { make } from 'vuex-pathify'
 const state = {
-  firstName: 'JOhn Doe'
+  firstName: 'John Doe'
 }
-const getters = {
-  showState: state => state
-}
-const mutations = {
-  firstName(state, payload) {
-    state.firstName = payload
-  }
-}
-const actions = {
-}
+const mutations = make.mutations(state)
 export default {
   namespaced: true,
   state,
-  mutations,
-  actions,
-  getters
+  mutations
 }
